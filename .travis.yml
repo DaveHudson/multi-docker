@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t applification/docker-react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t davehudson/docker-react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run applification/docker-react-test npm test -- --coverage
+  - docker run davehudson/docker-react-test npm test -- --coverage
 
 after_success:
-  - docker build -t applification/multi-client ./client
-  - docker build -t applification/multi-nginx ./nginx
-  - docker build -t applification/multi-server ./server
-  - docker build -t applification/multi-worker ./worker
+  - docker build -t davehudson/multi-client ./client
+  - docker build -t davehudson/multi-nginx ./nginx
+  - docker build -t davehudson/multi-server ./server
+  - docker build -t davehudson/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push applification/multi-client
-  - docker push applification/multi-nginx
-  - docker push applification/multi-server
-  - docker push applification/multi-worker
+  - docker push davehudson/multi-client
+  - docker push davehudson/multi-nginx
+  - docker push davehudson/multi-server
+  - docker push davehudson/multi-worker
